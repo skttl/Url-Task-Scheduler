@@ -72,6 +72,7 @@ namespace TechDevils.UrlTaskScheduler.TechDevilsTaskScheduler.Service
             //}
 
             urls = urls.Where(x => x.NextRun < runTime && !x.Disabled && x.UrlTaskStatus == UrlTaskStatus.inactive).ToList();
+            urls = urls.Where(x => x.NextRun < runTime && !x.Disabled && (x.UrlTaskStatus == UrlTaskStatus.inactive || x.NextRun.AddHours(1) < runTime)).ToList();
             try
             {
                 this.CallUrls(urls);
