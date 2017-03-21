@@ -70,8 +70,7 @@ namespace TechDevils.UrlTaskScheduler.TechDevilsTaskScheduler.Service
             //    _log.Info("!scheduleUrl.Disabled = " + (!scheduleUrl.Disabled));
             //    _log.Info("scheduleUrl.UrlTaskStatus == UrlTaskStatus.inactive = " + (scheduleUrl.UrlTaskStatus == UrlTaskStatus.inactive));
             //}
-
-            urls = urls.Where(x => x.NextRun < runTime && !x.Disabled && x.UrlTaskStatus == UrlTaskStatus.inactive).ToList();
+            
             urls = urls.Where(x => x.NextRun < runTime && !x.Disabled && (x.UrlTaskStatus == UrlTaskStatus.inactive || x.NextRun.AddHours(1) < runTime)).ToList();
             try
             {
